@@ -3,7 +3,7 @@ package handler
 import (
 	"golang-inter/model"
 	"encoding/json"	
-	"io/ioutil"
+	// "io/ioutil"	
 	"net/http"
 )
 
@@ -22,24 +22,6 @@ func HandlerMahasiswaGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerMahasiswaPost(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	var data model.Mahasiswa
-	if err = json.Unmarshal(body, &data); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	if err = data.Insert(db); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	jsonData, err := json.Marshal(data)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-	w.Write(jsonData)
+	username := r.FormValue("username")
+	w.Write([]byte("Halo " + username))
 }

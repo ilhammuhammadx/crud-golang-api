@@ -31,9 +31,9 @@ func Api(w http.ResponseWriter, r *http.Request) {
 	switch dataURL[2] {
 	case "mahasiswa":
 		switch r.Method {
-		case "GET":
+		case http.MethodGet:
 			HandlerMahasiswaGet(w, r)
-		case "POST":
+		case http.MethodPost:
 			HandlerMahasiswaPost(w, r)
 		// case http.MethodPut:
 		// 	HandlerMahasiswaPut(w, r)
