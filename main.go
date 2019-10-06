@@ -1,11 +1,11 @@
 package main
 
 import (
-	"golang-inter/handler"
-	"golang-inter/model"
-	"fmt"
+	"crud-golang-api/handler"
+	"crud-golang-api/model"
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -33,12 +33,12 @@ func main() {
 
 	http.HandleFunc("/mahasiswa", mahasiswa)
 	http.HandleFunc("/mahasiswas", mahasiswas)
-	
+
 	http.HandleFunc("/matakuliah", matakuliah)
 	http.HandleFunc("/matakuliahs", matakuliahs)
-	
+
 	http.HandleFunc("/nilai", nilai)
-	http.HandleFunc("/nilais", nilais)	
+	http.HandleFunc("/nilais", nilais)
 
 	http.HandleFunc("/login", login)
 

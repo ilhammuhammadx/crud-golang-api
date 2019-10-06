@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"crud-golang-api/model"
 	"database/sql"
 	"fmt"
 	"net/http"
@@ -17,6 +18,7 @@ func init() {
 	host = "localhost"
 	namaDB = "gunadarma"
 	defaultDB = "mysql"
+
 }
 
 func LastIndex(r *http.Request) string {
@@ -26,6 +28,12 @@ func LastIndex(r *http.Request) string {
 }
 
 func Api(w http.ResponseWriter, r *http.Request) {
+	db, err = model.Connect(username, password, host, namaDB)
+	if err != nil {
+		return
+	}
+	defer db.Close()
+
 	w.Header().Set("Content-Type", "text-htmll; charset=utf-8; application/json")
 	dataURL := strings.Split(fmt.Sprintf("%s", r.URL.Path), "/")
 	switch dataURL[2] {
@@ -35,12 +43,38 @@ func Api(w http.ResponseWriter, r *http.Request) {
 			HandlerMahasiswaGet(w, r)
 		case "POST":
 			HandlerMahasiswaPost(w, r)
-		// case http.MethodPut:
-		// 	HandlerMahasiswaPut(w, r)
-		// case http.MethodDelete:
-		// 	HandlerMahasiswaDelete(w, r)
+		case http.MethodPut:
+			HandlerMahasiswaPut(w, r)
+		case http.MethodDelete:
+			HandlerMahasiswaDelete(w, r)
 		default:
 			w.Write([]byte("method tidak ditemukan"))
+		}
+	case "matkul":
+		switch r.Method {
+		case "GET":
+			HandlerMatkulGet(w, r)
+		case "POST":
+			HandlerMatkulPost(w, r)
+		case "PUT":
+			HandlerMatkulPut(w, r)
+		case "DELETE":
+			HandlerMatkulDelete(w, r)
+		default:
+			w.Write([]byte("Method tidak ditemukan"))
+		}
+	case "nilai":
+		switch r.Method {
+		case "GET":
+			HandlerNilaiGet(w, r)
+		case "POST":
+			HandlerNilaiPost(w, r)
+		case "PUT":
+			HandlerNilaiPut(w, r)
+		case "DELETE":
+			HandlerNilaiDelete(w, r)
+		default:
+			w.Write([]byte("Method tidak ditemukan"))
 		}
 	default:
 		w.Write([]byte("request tidak ditemukan"))

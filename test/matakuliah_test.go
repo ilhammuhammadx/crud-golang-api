@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"golang-inter/model"
+	"crud-golang-api/model"
 	"testing"
 )
 
@@ -52,14 +52,14 @@ func TestMatkul(t *testing.T) {
 
 	t.Run("Testing Get matkul", func(t *testing.T) {
 		// data := dataInsertMatkul[0]
-		_, err := model.Get(db, "KA3")
+		_, err := model.GetMatkul(db, "KA3")
 		if err != nil {
 			t.Fatal(err)
 		}
 		// fmt.Println(result)
 	})
 
-	t.Run("Testing Get matkul", func(t *testing.T) {
+	t.Run("Testing GetAll matkul", func(t *testing.T) {
 		result, err := model.GetAllMatkul(db)
 		if err != nil {
 			t.Fatal(err)

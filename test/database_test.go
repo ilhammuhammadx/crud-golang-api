@@ -3,7 +3,7 @@ package test
 import (
 	"database/sql"
 	"fmt"
-	"golang-inter/model"
+	"crud-golang-api/model"
 	"testing"
 )
 

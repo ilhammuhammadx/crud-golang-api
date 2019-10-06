@@ -1,7 +1,7 @@
 package test
 
 import (
-	"golang-inter/model"
+	"crud-golang-api/model"
 	"testing"
 )
 
@@ -53,7 +53,7 @@ func TestMahasiswa(t *testing.T) {
 	})
 
 	t.Run("Testing Get mahasiswa", func(t *testing.T) {		
-		_, err := model.Get(db, "44444444")
+		_, err := model.GetMahasiswa(db, "44444444")
 		if err != nil {
 			t.Fatal(err)
 		}

@@ -19,7 +19,7 @@ var TabelNilai string = `
 `
 
 type Nilai struct {
-	Id_nilai int     `json:"idnilai"`
+	Id_nilai int     `json:"id_nilai"`
 	Kd_mk    string  `json:"kd_mk"`
 	NPM      string  `json:"npm"`
 	UAS      float64 `json:"uas"`
@@ -62,17 +62,17 @@ func (m *Nilai) Update(db *sql.DB, data map[string]interface{}) error {
 	// Ubah array menjadi string dengan pemisah koma
 	dataUpdate := strings.Join(kolom, ",")
 
-	query := fmt.Sprintf("UPDATE %s SET %s WHERE %s = ?", "nilai", dataUpdate, "id_nilai")
-	args = append(args, m.Id_nilai)
+	query := fmt.Sprintf("UPDATE %s SET %s WHERE %s = ?", "nilai", dataUpdate, "npm")
+	args = append(args, m.NPM)
 	// Exec dengan query yang ada
 	_, err := db.Exec(query, args...)
 	return err
 }
 
 func (m *Nilai) Delete(db *sql.DB) error {
-	query := fmt.Sprintf("DELETE FROM %s WHERE %s = ?", "nilai", "id_nilai")
+	query := fmt.Sprintf("DELETE FROM %s WHERE %s = ?", "nilai", "npm")
 	// Exec dengan query yang ada
-	_, err := db.Exec(query, m.Id_nilai)
+	_, err := db.Exec(query, m.NPM)
 	return err
 }
 
@@ -84,7 +84,7 @@ func GetNilai(db *sql.DB, id string) (*Nilai, error) {
 	query := fmt.Sprintf("SELECT * FROM %s WHERE %s = ?", "nilai", "npm")
 
 	// isinya akan dimasukan kedalam var dst yang dideklarasikan diatas
-	err := db.QueryRow(query, m.NPM).Scan(dst...)
+	err := db.QueryRow(query, id).Scan(dst...)
 	if err != nil {
 		return nil, err
 	}

@@ -1,5 +1,6 @@
 package handler
 
+
 import (
 	"crud-golang-api/model"
 	"encoding/json"
@@ -7,16 +8,15 @@ import (
 	"net/http"
 )
 
-func HandlerMahasiswaGet(w http.ResponseWriter, r *http.Request) {
-
+func HandlerNilaiGet(w http.ResponseWriter, r *http.Request) {
 	var data interface{}
 	var err error
 
 	npm := r.URL.Query()["npm"]
 	if len(npm) != 0 {
-		data, err = model.GetMahasiswa(db, npm[0])
+		data, err = model.GetNilai(db, npm[0])
 	} else {
-		data, err = model.GetAllMahasiswa(db)
+		data, err = model.GetAllNilai(db)
 	}
 
 	if err != nil {
@@ -24,17 +24,16 @@ func HandlerMahasiswaGet(w http.ResponseWriter, r *http.Request) {
 	}
 	jsonData, _ := json.Marshal(data)
 	w.Write(jsonData)
-
 }
 
-func HandlerMahasiswaPost(w http.ResponseWriter, r *http.Request) {
+func HandlerNilaiPost(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var data model.Mahasiswa
+	var data model.Nilai
 	if err = json.Unmarshal(body, &data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -50,12 +49,11 @@ func HandlerMahasiswaPost(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonData)
 }
 
-func HandlerMahasiswaDelete(w http.ResponseWriter, r *http.Request) {
-
+func HandlerNilaiDelete(w http.ResponseWriter, r *http.Request) {
 	npm := r.URL.Query()["npm"]
 
 	if len(npm) != 0 {
-		data := model.Mahasiswa{NPM: npm[0]}
+		data := model.Nilai{NPM: npm[0]}
 		if err := data.Delete(db); err != nil {
 			http.Error(w, "ID tidak ditemukan", http.StatusBadRequest)
 			return
@@ -64,11 +62,9 @@ func HandlerMahasiswaDelete(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "ID tidak ditemukan", http.StatusInternalServerError)
 	}
-
 }
 
-func HandlerMahasiswaPut(w http.ResponseWriter, r *http.Request) {
-
+func HandlerNilaiPut(w http.ResponseWriter, r *http.Request) {
 	npm := r.URL.Query()["npm"]
 
 	if len(npm) == 0 {
@@ -90,7 +86,7 @@ func HandlerMahasiswaPut(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := model.Mahasiswa{NPM: npm[0]}
+	data := model.Nilai{NPM: npm[0]}
 
 	err = data.Update(db, jsonmap)
 	if err != nil {
@@ -98,7 +94,7 @@ func HandlerMahasiswaPut(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := model.GetMahasiswa(db, npm[0])
+	result, err := model.GetNilai(db, npm[0])
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

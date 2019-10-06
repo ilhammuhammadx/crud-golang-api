@@ -78,6 +78,7 @@ func GetMahasiswa(db *sql.DB, id string) (*Mahasiswa, error) {
 	// isinya akan dimasukan kedalam var dst yang dideklarasikan diatas
 	err := db.QueryRow(query, id).Scan(dst...)
 	if err != nil {
+		fmt.Println(err)
 		return nil, err
 	}
 	return each, nil

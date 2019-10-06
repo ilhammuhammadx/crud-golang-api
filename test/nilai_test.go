@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"golang-inter/model"
+	"crud-golang-api/model"
 	"testing"
 )
 
@@ -58,13 +58,13 @@ func TestNilai(t *testing.T) {
 
 	})
 
-	t.Run("Testing Get nilai", func(t *testing.T) {
-		data := dataInsertNilai[0]
-		result, err := data.Get(db)
+	t.Run("Testing GetAll nilai", func(t *testing.T) {
+		// data := dataInsertNilai[0]
+		_, err := model.GetNilai(db, "44444444")
 		if err != nil {
 			t.Fatal(err)
 		}
-		fmt.Println(result)
+		// fmt.Println(result)
 	})
 
 	t.Run("Testing Get nilai", func(t *testing.T) {
