@@ -73,6 +73,5 @@ func TestMahasiswa(t *testing.T) {
 			t.Fatal(err)
 		}
 	})
-
 	defer db.Close()
 }

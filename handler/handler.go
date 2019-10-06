@@ -20,20 +20,14 @@ func init() {
 	defaultDB = "mysql"
 }
 
-// func LastIndex(r *http.Request) string {
-// 	dataURL := strings.Split(fmt.Sprintf("%s", r.URL.Path), "/")
-// 	lastIndex := dataURL[len(dataURL)-1]
-// 	return lastIndex
-// }
-
-func Api(w http.ResponseWriter, r *http.Request) {
+func api(w http.ResponseWriter, r *http.Request) {
 	db, err = model.Connect(username, password, host, namaDB)
 	if err != nil {
 		return
 	}
 	defer db.Close()
 
-	w.Header().Set("Content-Type", "text-htmll; charset=utf-8; application/json")
+	w.Header().Set("Content-Type", "text-html; charset=utf-8; application/json")
 	dataURL := strings.Split(fmt.Sprintf("%s", r.URL.Path), "/")
 	switch dataURL[2] {
 	case "mahasiswa":
