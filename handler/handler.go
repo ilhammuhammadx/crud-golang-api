@@ -20,7 +20,7 @@ func init() {
 	defaultDB = "mysql"
 }
 
-func api(w http.ResponseWriter, r *http.Request) {
+func API(w http.ResponseWriter, r *http.Request) {
 	db, err = model.Connect(username, password, host, namaDB)
 	if err != nil {
 		return

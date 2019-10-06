@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/api/", handler.api)
+	http.HandleFunc("/api/", handler.API)
 
 	log.Println("localhost : 8000")
 	http.ListenAndServe(":8000", nil)
