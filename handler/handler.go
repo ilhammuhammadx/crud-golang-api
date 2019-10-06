@@ -18,14 +18,13 @@ func init() {
 	host = "localhost"
 	namaDB = "gunadarma"
 	defaultDB = "mysql"
-
 }
 
-func LastIndex(r *http.Request) string {
-	dataURL := strings.Split(fmt.Sprintf("%s", r.URL.Path), "/")
-	lastIndex := dataURL[len(dataURL)-1]
-	return lastIndex
-}
+// func LastIndex(r *http.Request) string {
+// 	dataURL := strings.Split(fmt.Sprintf("%s", r.URL.Path), "/")
+// 	lastIndex := dataURL[len(dataURL)-1]
+// 	return lastIndex
+// }
 
 func Api(w http.ResponseWriter, r *http.Request) {
 	db, err = model.Connect(username, password, host, namaDB)
